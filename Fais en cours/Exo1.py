@@ -8,4 +8,4 @@ p=re.compile(number)
 z=re.compile(entire)
 e=re.compile(plaque)
 
-print(p.match('+34') is not None)
+print(p.match('+34 321 12 12 12') is not None)
