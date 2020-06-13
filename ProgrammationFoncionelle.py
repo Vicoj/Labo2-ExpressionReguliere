@@ -144,7 +144,6 @@ def timeit (f):
     return wrapper
 
 #Paramètre de décorateur (1)
-
 def checktypes (* types ):
     def decorator (f):
         def wrapper (* args ):
@@ -155,4 +154,19 @@ def checktypes (* types ):
 @checktypes (int)
 def compute (n):
     return n**2
-print (compute('hey'))
+#print (compute(8))
+
+#Paramètre de décorateur (2)
+def checktypes (*types):
+    def decorator (f):
+        def wrapper (* args ):
+            return f(* args )
+        return wrapper
+    return decorator
+
+def compute (n):
+    return n ** 2
+
+f1 = checktypes(int)
+f2 = f1(compute)
+print (f2(9))
