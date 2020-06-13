@@ -132,7 +132,7 @@ def sayhello ():
     print ('Hello !')
 #sayhello ()
 
-#Chronométrer le temps d’exécution
+#Chronométrer le temps d'exécution
 import time
 
 def timeit (f):
@@ -169,4 +169,36 @@ def compute (n):
 
 f1 = checktypes(int)
 f2 = f1(compute)
-print (f2(9))
+#print (f2(9))
+
+#Vérification des types
+def checktypes (* types ):
+    def decorator (f):
+        def wrapper (* args ):
+            assert len ( types ) == len ( args ), 'wrong number of types '
+            for (a, t) in zip (args , types ):
+                assert isinstance (a, t), 'arg {} does not match {} '.format (a, t)
+            return f(* args )
+        return wrapper
+    return decorator
+
+##GENERATEUR
+#Définition d'un itérateur (1)
+import re
+
+RE_WORDS = re.compile ('\w+')
+
+class Sentence :
+    def __init__ (self , text ):
+        self . __text = text
+        self . __words = RE_WORDS . findall ( text )
+    def __getitem__ (self , i):
+        return self . __words [i]
+    def __len__ ( self ):
+        return len ( self . __words )
+
+#Définition d'un itérateur (2)
+s = Sentence (" Bonjour , c'est moi .")
+print ( list (s))
+for word in s:
+print ( word )
